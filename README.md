@@ -5,7 +5,7 @@
 
 Instructions and scripts to start the CannSeek server, and load datasets when needed. 
 The Tomcat archive includes the war file and internal directories mapped to the host flatfile directory
-The Postgres archive is preloaded with the three references (cs10, pkv5, fnv2) and their gene models, and the cs10 21TRICH SNP dataset.
+The Postgres archive is preloaded with the three references (cs10, pkv5, fnv2) and their gene models, and the cs10 26TRICH SNP dataset.
 
 A separate repository is provided for the CannSeek web application source code and Eclipse project at [CannSeek](https://bitbucket.org/irridev/iric_portal/src/CannSeek)
 
