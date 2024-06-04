@@ -54,7 +54,7 @@ When a new SNP dataset is available for any of the loaded reference (cs10,pkv5, 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**snpefffile** .misssyn.txt snpeffects file (concatenated from missense_variant.txt and synonymous_variant.txt files generated in D.2)   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**snpeffannotfile** .filtered.txt filtered SNP annotation file (generated in D.2)   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**organism_id** organism_id in database (3 for cs10 in the provided databases) 
-&nbsp;&nbsp;&nbsp;2. copy the files defined in H.1 to the host directory mapped to container /transfer  
+&nbsp;&nbsp;&nbsp;2. copy the files defined in G.1 to the host directory mapped to /transfer in the Postgres container 
 &nbsp;&nbsp;&nbsp;3. create symbolic links ``ln -s`` to the files in H.2 in the location of ``load_snp.py``    
 &nbsp;&nbsp;&nbsp;4. modify the database connection dictionary connstr in ``load_snp.py`` if needed  
 &nbsp;&nbsp;&nbsp;5. run ``python load_snp.py``	    
