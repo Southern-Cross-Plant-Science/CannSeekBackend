@@ -31,19 +31,19 @@ When a new SNP dataset is available for any of the loaded reference (cs10,pkv5, 
 &nbsp;B. Generate SNP effect annotations using SNPEff on the VCF file using the same reference and available predicted gene models. Follow the [SNPEff manual](https://pcingola.github.io/SnpEff/snpeff/running)
 
 &nbsp;C. For VCF files with both SNPs and indels, filter to include SNPs only    
-&nbsp;&nbsp;&nbsp;1. modify REF, VCFNAME and BCF in ``filter_snps.sh``. REF if reference fasta, VCF is vcf file path, BCF is bcftools path  
+&nbsp;&nbsp;&nbsp;1. modify REF, VCFNAME and BCF in ``filter_snps.sh``. REF is reference fasta, VCF is vcf file path, BCF is bcftools path  
 &nbsp;&nbsp;&nbsp;2. run ``filter_snps.sh``  
 	
 &nbsp;D. Process and filter (only HIGH,MODERATE, and LOW effects) SNPEff VCF result.  
-&nbsp;&nbsp;&nbsp;1. modify VCFNAME and BCF in ``filter-highmodlow.py``. VCFNAME is path of SNP only vcf with SNPEff annotation. BCF is bcftools path  
+&nbsp;&nbsp;&nbsp;1. modify VCFNAME and BCF in ``filter-highmodlow.py``. VCFNAME is path of SNP-only vcf with SNPEff annotation. BCF is bcftools path  
 &nbsp;&nbsp;&nbsp;2. run ``python filter-highmodlow.py``  
 	
 &nbsp;E. Generate HDF5 and csv files for loading  
-&nbsp;&nbsp;&nbsp;1. modify VCFNAME, BCF and LOADMATRIX\_GENO in ``vcf2h5.sh``. VCFNAME is path of SNP only vcf, LOADMATRIX_GENO is path to ``loadmatrix_gene`` executable,  BCF is bcftools path  
+&nbsp;&nbsp;&nbsp;1. modify VCFNAME, BCF and LOADMATRIX\_GENO in ``vcf2h5.sh``. VCFNAME is path of SNP-only vcf, LOADMATRIX_GENO is path to ``loadmatrix_gene`` executable,  BCF is bcftools path  
 &nbsp;&nbsp;&nbsp;2. run ``vcf2h5.sh``
 
 	
-&nbsp;F. If not yet started, start the CannSeek Postgres database server and from the Docker/Podman archives/images as described above.   
+&nbsp;F. If not yet started, start the CannSeek Postgres database and Tomcat server from the Docker/Podman archives/images as described above.   
 
 
 &nbsp;G. Load the SNPs data  
@@ -53,7 +53,7 @@ When a new SNP dataset is available for any of the loaded reference (cs10,pkv5, 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**posfile** positions file (generated in E.2)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**snpefffile** .misssyn.txt snpeffects file (concatenated from missense_variant.txt and synonymous_variant.txt files generated in D.2)   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**snpeffannotfile** .filtered.txt filtered SNP annotation file (generated in D.2)   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**organism_id** organism_id in database (3 for cs10 in the provided databases)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**organism_id** organism_id in database (3 for cs10, 2 for pkv5, 25 for fnv2 in the provided database)   
 &nbsp;&nbsp;&nbsp;2. copy the files defined in G.1 to the host directory mapped to /transfer in the Postgres container    
 &nbsp;&nbsp;&nbsp;3. create symbolic links ``ln -s`` to the files in G.1 in the location of ``load_snp.py``    
 &nbsp;&nbsp;&nbsp;4. modify the database connection dictionary connstr in ``load_snp.py`` if needed  
